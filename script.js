@@ -7,6 +7,10 @@ function init() {
   }
 }
 
+/**
+ * Convert the uploaded font
+ * @param {*} evt 
+ */
 function handleFileSelect(evt) {
 
   var f = evt.target.files[0]; // FileList object
@@ -34,7 +38,7 @@ function handleFileSelect(evt) {
       }
 
       if (mimeType) {
-        cssFontFace = "/*Character Style cs-" + fontName + "*/\n" +
+        charachterStyleCSS = "/*Character Style cs-" + fontName + "*/\n" +
                 "@font-face { \n" +
                 "   font-family: '" + fontName + "';\n" +
                 "   src: url('data:" + mimeType + ";base64," + base64String + "') \n" +
@@ -44,8 +48,7 @@ function handleFileSelect(evt) {
                 "   font-famlify: '" + fontName + "'\n" +
                 "}";
 
-        document.getElementById('charachterStyleTA').value = cssFontFace;
-
+        document.getElementById('charachterStyleTA').value = charachterStyleCSS;
       } else {
         alert("Please select a TTF, WOFF or WOFF2 font")
       }
