@@ -1,0 +1,27 @@
+<html>
+
+<head>
+    <script src="./script.js"></script>
+</head>
+
+<body onload="init()" style="font-family:Roboto, 'Helvetica Neue'">
+    <h1>Font Converter</h1>
+    <b>Step 1:</b> Select a TTF or WOFF font
+    <input type="file" id="files" name="files" />
+    <br />
+    <br />
+    <b>Step 2:</b> Copy the css to the font section of the look & feel
+    <br />
+    <textarea id="charachterStyleTA" rows="6" style="width:100%"></textarea>
+    <br />
+    <button onclick="copyToClipboard(document.getElementById('charachterStyleTA'))">Copy</button>
+    <br />
+    <br />
+    <b>Step 3:</b> Copy the AN+ to the AN section of the look & feel
+    <br />
+    <textarea id="anStyleTA" rows="6" style="width:100%"></textarea>
+    <br />
+    <button onclick="copyToClipboard(document.getElementById('anStyleTA'))">Copy</button>  
+</body>
+
+</html>
