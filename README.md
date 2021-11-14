@@ -9,6 +9,6 @@ https://woodwing.github.io/digital-editor-font-helper/
 # installation
 Add a Digital editor plug-in in the Studio management console with the following url
 
-https://woodwing.github.io/digital-editor-font-helper/font-converter.js
+https://woodwing.github.io/digital-editor-font-helper/digital-editor-font-helper.js
 
 
