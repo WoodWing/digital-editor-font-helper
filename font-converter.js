@@ -37,12 +37,7 @@ class FontConverterService {
 
     getBaseURL()
 	{	
-		//var info = ContentStationSdk.getInfo();
-	 	//var serverURL =  info.ServerInfo.URL.replace('index.php','');
-		//return serverURL + 'config/plugins/SeoPanel/';
-        
-
-        return "http://docker.for.mac.localhost/integrations/font-converter/"
+        return "https://woodwing.github.io/digital-editor-font-helper/";
 	}
 }
 
@@ -62,5 +57,3 @@ class FontConverterService {
 
     
 })(DigitalEditorSdk);
-console.log ("document.currentScript");
-console.log (document.currentScript);
