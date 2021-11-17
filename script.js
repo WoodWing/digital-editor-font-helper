@@ -31,6 +31,7 @@ function handleFileSelect(evt) {
       const font = opentype.parse(arrayBuffer);
       console.log (font);
       var fontFamily = font.names.fullName.en;
+      var postScriptName = font.names.postScriptName.en;
       var charStyleName = "cs-" + fontFamily.replaceAll(" ", "-").toLowerCase();
 
 
@@ -74,7 +75,7 @@ function handleFileSelect(evt) {
     "textStyle": "${charStyleName}"
   },
   "properties": {
-    "fontName": "${fontFamily}"
+    "fontName": "${postScriptName}"
   }
 }`;
                 
