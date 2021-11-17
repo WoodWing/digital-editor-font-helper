@@ -18,17 +18,23 @@ function handleFileSelect(evt) {
   // Closure to capture the file information.
   reader.onload = (function (theFile) {
     return function (e) {
-      var binaryData = e.target.result;
+      var arrayBuffer = e.target.result;
 
-      //Converting Binary Data to base 64
-      var base64String = window.btoa(binaryData);
+      //Converting Binary Data to base 64            
+      var base64String = window.btoa(
+        new Uint8Array(arrayBuffer)
+          .reduce((data, byte) => data + String.fromCharCode(byte), '')
+      )
 
-      //showing file converted to base64
-      var fileNameElements = f.name.split('.');
-      var extension = fileNameElements.pop();
-      var fontName =  fileNameElements.join(".");
       
-      mimeType = "";
+      var extension = f.name.split('.').pop();
+      const font = opentype.parse(arrayBuffer);
+      console.log (font);
+      var fontFamily = font.names.fullName.en;
+      var charStyleName = "cs-" + fontFamily.replaceAll(" ", "-").toLowerCase();
+
+
+      var mimeType = "";
       if (extension === "ttf") {
         mimeType = "application/x-font-truetype";
       } else if (extension === "woff") {
@@ -38,17 +44,44 @@ function handleFileSelect(evt) {
       }
 
       if (mimeType) {
-        charachterStyleCSS = "/*Character Style cs-" + fontName + "*/\n" +
+        charachterStyleCSS = 
+`/*Character Style ${charStyleName} */
+@font-face {
+  font-family: '${fontFamily}';
+  src: url('data:${mimeType};base64,${base64String}')
+}
+
+.${charStyleName} {
+  font-family: '${fontFamily}'
+}`;
+        
+        
+        
+        
+        "/*Character Style " + charStyleName + "*/\n" +
                 "@font-face { \n" +
-                "   font-family: '" + fontName + "';\n" +
+                "   font-family: '" + fontFamily + "';\n" +
                 "   src: url('data:" + mimeType + ";base64," + base64String + "') \n" +
                 "   format('" + extension + "'); font-style: normal; font-weight: normal \n" +
                 "}\n" + 
-                ".cs-" + fontName + "{\n" +
-                "   font-famlify: '" + fontName + "'\n" +
+                "." + charStyleName + "{\n" +
+                "   font-famlify: '" + fontFamily + "'\n" +
                 "}";
 
-        document.getElementById('charachterStyleTA').value = charachterStyleCSS;
+        anStyle = 
+`{
+  "selector": {
+    "textStyle": "${charStyleName}"
+  },
+  "properties": {
+    "fontName": "${fontFamily}"
+  }
+}`;
+                
+        document.getElementById('charachterStyleNameInput').value = fontFamily;
+        document.getElementById('charachterStyleTechNameInput').value = charStyleName;
+        document.getElementById('charachterStyleCSSTA').value = charachterStyleCSS;
+        document.getElementById('anStyleTA').value = anStyle;
       } else {
         alert("Please select a TTF, WOFF or WOFF2 font")
       }
@@ -56,7 +89,7 @@ function handleFileSelect(evt) {
   })(f);
 
   // Read in the image file as a data URL.
-  reader.readAsBinaryString(f);
+  reader.readAsArrayBuffer(f);
 }
 
 /**

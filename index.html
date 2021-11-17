@@ -1,6 +1,7 @@
 <html>
 
 <head>
+    <script src="https://cdn.jsdelivr.net/npm/opentype.js@latest/dist/opentype.min.js"></script>
     <script src="./script.js"></script>
 </head>
 
@@ -10,18 +11,34 @@
     <input type="file" id="files" name="files" />
     <br />
     <br />
-    <b>Step 2:</b> Copy the css to the font section of the look & feel
+    <b>Step 2:</b> Create a character style 
     <br />
-    <textarea id="charachterStyleTA" rows="6" style="width:100%"></textarea>
     <br />
-    <button onclick="copyToClipboard(document.getElementById('charachterStyleTA'))">Copy</button>
-    <!--<br />
+    Name
+    <input type="text" id="charachterStyleNameInput" rows="1" style="width:100%"></input>
+    <button onclick="copyToClipboard(document.getElementById('charachterStyleNameInput'))">Copy</button>
     <br />
-    <b>Step 3:</b> Copy the AN+ to the AN section of the look & feel
+    <br />
+    Technical name
+    <input type="text" id="charachterStyleTechNameInput" rows="1" style="width:100%"></input>
+    <button onclick="copyToClipboard(document.getElementById('charachterStyleTechNameInput'))">Copy</button>
+    <br />
+    <br />
+    <b>Step 3:</b> Copy the css to the font section of the look & feel
+    <br />
+    <textarea id="charachterStyleCSSTA" rows="6" style="width:100%"></textarea>
+    <br />
+    <button onclick="copyToClipboard(document.getElementById('charachterStyleCSSTA'))">Copy</button>
+    <br />
+    <br />
+    <b>Step 4:</b> Copy the AppleNews styling to the AppleNews section of the look & feel
     <br />
     <textarea id="anStyleTA" rows="6" style="width:100%"></textarea>
     <br />
-    <button onclick="copyToClipboard(document.getElementById('anStyleTA'))">Copy</button>  -->
+    <button onclick="copyToClipboard(document.getElementById('anStyleTA'))">Copy</button> 
+    <br />
+    <br />
+    <b>Step 5:</b> Upload the font in AppleNews
 </body>
 
 </html>
