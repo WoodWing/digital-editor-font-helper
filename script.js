@@ -13,28 +13,26 @@ function init() {
  */
 function handleFileSelect(evt) {
 
-  var f = evt.target.files[0]; // FileList object
+  var f = evt.target.files[0]; 
   var reader = new FileReader();
-  // Closure to capture the file information.
+  
   reader.onload = (function (theFile) {
     return function (e) {
       var arrayBuffer = e.target.result;
 
-      //Converting Binary Data to base 64            
+      //Converting font to base 64            
       var base64String = window.btoa(
         new Uint8Array(arrayBuffer)
           .reduce((data, byte) => data + String.fromCharCode(byte), '')
       )
 
-      
+      //Extract font information
       var extension = f.name.split('.').pop();
       const font = opentype.parse(arrayBuffer);
       console.log (font);
       var fontFamily = font.names.fullName.en;
       var postScriptName = font.names.postScriptName.en;
-      var charStyleName = "cs-" + fontFamily.replaceAll(" ", "-").toLowerCase();
-
-
+      var charStyleName = "cs-" + fontFamily.replaceAll(" ", "-").toLowerCase();      
       var mimeType = "";
       if (extension === "ttf") {
         mimeType = "application/x-font-truetype";
@@ -47,6 +45,7 @@ function handleFileSelect(evt) {
         return;
       }
       
+      //Create CSS + AN
       charachterStyleCSS = 
 `/*Character Style ${charStyleName} */
 @font-face {
@@ -67,7 +66,8 @@ function handleFileSelect(evt) {
     "fontName": "${postScriptName}"
   }
 }`;
-                
+
+      //Update UI       
       document.getElementById('charachterStyleNameInput').value = fontFamily;
       document.getElementById('charachterStyleTechNameInput').value = charStyleName;
       document.getElementById('charachterStyleCSSTA').value = charachterStyleCSS;
@@ -75,14 +75,14 @@ function handleFileSelect(evt) {
     };
   })(f);
 
-  // Read in the image file as a data URL.
+  // Read in the font as array buffer
   reader.readAsArrayBuffer(f);
 }
 
 /**
- * Copy the text of the provided textArea to the clipboard
+ * Copy the text of the provided html element to the clipboard
  */
-function copyToClipboard(textArea) {
-  textArea.select();
+function copyToClipboard(element) {
+  element.select();
   document.execCommand("copy");
 }
