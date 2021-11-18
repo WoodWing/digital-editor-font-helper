@@ -42,34 +42,23 @@ function handleFileSelect(evt) {
         mimeType = "application/font-woff";
       } else if (extension === "woff2") {
         mimeType = "application/font-woff2";
+      } else {
+        alert("Please select a TTF, WOFF or WOFF2 font")
+        return;
       }
-
-      if (mimeType) {
-        charachterStyleCSS = 
+      
+      charachterStyleCSS = 
 `/*Character Style ${charStyleName} */
 @font-face {
-  font-family: '${fontFamily}';
+  font-family: '${postScriptName}';
   src: url('data:${mimeType};base64,${base64String}')
 }
 
 .${charStyleName} {
-  font-family: '${fontFamily}'
+  font-family: '${postScriptName}'
 }`;
-        
-        
-        
-        
-        "/*Character Style " + charStyleName + "*/\n" +
-                "@font-face { \n" +
-                "   font-family: '" + fontFamily + "';\n" +
-                "   src: url('data:" + mimeType + ";base64," + base64String + "') \n" +
-                "   format('" + extension + "'); font-style: normal; font-weight: normal \n" +
-                "}\n" + 
-                "." + charStyleName + "{\n" +
-                "   font-famlify: '" + fontFamily + "'\n" +
-                "}";
-
-        anStyle = 
+                
+      anStyle = 
 `{
   "selector": {
     "textStyle": "${charStyleName}"
@@ -79,13 +68,10 @@ function handleFileSelect(evt) {
   }
 }`;
                 
-        document.getElementById('charachterStyleNameInput').value = fontFamily;
-        document.getElementById('charachterStyleTechNameInput').value = charStyleName;
-        document.getElementById('charachterStyleCSSTA').value = charachterStyleCSS;
-        document.getElementById('anStyleTA').value = anStyle;
-      } else {
-        alert("Please select a TTF, WOFF or WOFF2 font")
-      }
+      document.getElementById('charachterStyleNameInput').value = fontFamily;
+      document.getElementById('charachterStyleTechNameInput').value = charStyleName;
+      document.getElementById('charachterStyleCSSTA').value = charachterStyleCSS;
+      document.getElementById('anStyleTA').value = anStyle;
     };
   })(f);
 
