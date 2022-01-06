@@ -27,7 +27,7 @@ function handleFileSelect(evt) {
       )
 
       //Extract font information
-      var extension = f.name.split('.').pop();
+      var extension = f.name.split('.').pop().toLowerCase();
       const font = opentype.parse(arrayBuffer);
       console.log (font);
       var fontFamily = font.names.fullName.en;
