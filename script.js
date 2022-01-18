@@ -18,7 +18,7 @@ function handleFileSelect(evt) {
   
   reader.onload = (function (theFile) {
     return function (e) {
-      var arrayBuffer = e.target.result;
+      const arrayBuffer = e.target.result;
 
       //Converting font to base 64            
       var base64String = window.btoa(
@@ -27,40 +27,43 @@ function handleFileSelect(evt) {
       )
 
       //Extract font information
-      var extension = f.name.split('.').pop().toLowerCase();
+      const extension = f.name.split('.').pop().toLowerCase();
       const font = opentype.parse(arrayBuffer);
       console.log (font);
-      var fontFamily = font.names.fullName.en;
-      var postScriptName = font.names.postScriptName.en;
-      var charStyleName = "cs-" + fontFamily.replaceAll(" ", "-").toLowerCase();      
-      var mimeType = "";
+      const fontFamily = font.names.fullName.en;
+      const postScriptName = font.names.postScriptName.en;
+      const charStyleName = fontFamily.replaceAll(" ", "-").toLowerCase();
+      let mimeType = "";
+      // https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face#font_mime_types
       if (extension === "ttf") {
-        mimeType = "application/x-font-truetype";
+        mimeType = "font/ttf";
+      } else if (extension === "otf") {
+        mimeType = "font/otf";
       } else if (extension === "woff") {
-        mimeType = "application/font-woff";
+        mimeType = "font/woff";
       } else if (extension === "woff2") {
-        mimeType = "application/font-woff2";
+        mimeType = "font/woff2";
       } else {
-        alert("Please select a TTF, WOFF or WOFF2 font")
+        alert("Please select a ttf, otf, woff or woff2 font")
         return;
       }
       
       //Create CSS + AN
-      charachterStyleCSS = 
-`/*Character Style ${charStyleName} */
+      const characterStyleCSS =
+`/*Character Style cs-${charStyleName} */
 @font-face {
   font-family: '${postScriptName}';
   src: url('data:${mimeType};base64,${base64String}')
 }
 
-.${charStyleName} {
+.cs-${charStyleName} {
   font-family: '${postScriptName}'
 }`;
                 
-      anStyle = 
+      const anStyle =
 `{
   "selector": {
-    "textStyle": "${charStyleName}"
+    "textStyle": "cs-${charStyleName}"
   },
   "properties": {
     "fontName": "${postScriptName}"
@@ -68,9 +71,9 @@ function handleFileSelect(evt) {
 }`;
 
       //Update UI       
-      document.getElementById('charachterStyleNameInput').value = fontFamily;
-      document.getElementById('charachterStyleTechNameInput').value = charStyleName;
-      document.getElementById('charachterStyleCSSTA').value = charachterStyleCSS;
+      document.getElementById('characterStyleNameInput').value = fontFamily;
+      document.getElementById('characterStyleTechNameInput').value = charStyleName;
+      document.getElementById('characterStyleCSSTA').value = characterStyleCSS;
       document.getElementById('anStyleTA').value = anStyle;
     };
   })(f);

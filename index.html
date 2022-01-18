@@ -7,38 +7,33 @@
 
 <body onload="init()" style="font-family:Roboto, 'Helvetica Neue'">
     <h1>Font Converter</h1>
-    <b>Step 1:</b> Select a TTF or WOFF font
-    <input type="file" id="files" name="files" />
-    <br />
-    <br />
-    <b>Step 2:</b> Create a character style 
-    <br />
-    <br />
-    Name
-    <input type="text" id="charachterStyleNameInput" rows="1" style="width:100%"></input>
-    <button onclick="copyToClipboard(document.getElementById('charachterStyleNameInput'))">Copy</button>
-    <br />
-    <br />
-    Technical name
-    <input type="text" id="charachterStyleTechNameInput" rows="1" style="width:100%"></input>
-    <button onclick="copyToClipboard(document.getElementById('charachterStyleTechNameInput'))">Copy</button>
-    <br />
-    <br />
-    <b>Step 3:</b> Copy the css to the font section of the look & feel
-    <br />
-    <textarea id="charachterStyleCSSTA" rows="6" style="width:100%"></textarea>
-    <br />
-    <button onclick="copyToClipboard(document.getElementById('charachterStyleCSSTA'))">Copy</button>
-    <br />
-    <br />
-    <b>Step 4:</b> Copy the AppleNews styling to the AppleNews section of the look & feel
-    <br />
+    <p><b>Step 1:</b> Select a font file (ttf, otf, woff, woff2)
+    <input type="file" id="files" name="files" /></p>
+
+    <p><b>Step 2:</b> Create a character style</p>
+
+    <p>Label
+        <input type="text" id="characterStyleNameInput" rows="1" style="width: 100%"></input>
+        <button onclick="copyToClipboard(document.getElementById('characterStyleNameInput'))">Copy</button>
+    </p>
+
+    <p>CSS name
+        <span style="display: flex;align-items: flex-start">
+            <span>cs-</span>
+            <input type="text" id="characterStyleTechNameInput" rows="1" style="flex-grow: 1"></input>
+        </span>
+        <button onclick="copyToClipboard(document.getElementById('characterStyleTechNameInput'))">Copy</button>
+    </p>
+
+    <p><b>Step 3:</b> Copy the css to the font section of the look & feel
+    <textarea id="characterStyleCSSTA" rows="6" style="width:100%"></textarea>
+    <button onclick="copyToClipboard(document.getElementById('characterStyleCSSTA'))">Copy</button></p>
+
+    <p><b>Step 4:</b> Copy the AppleNews styling to the AppleNews section of the look & feel
     <textarea id="anStyleTA" rows="6" style="width:100%"></textarea>
-    <br />
-    <button onclick="copyToClipboard(document.getElementById('anStyleTA'))">Copy</button> 
-    <br />
-    <br />
-    <b>Step 5:</b> Upload the font in AppleNews
+    <button onclick="copyToClipboard(document.getElementById('anStyleTA'))">Copy</button></p>
+
+    <p><b>Step 5:</b> Upload the font in AppleNews</p>
 </body>
 
 </html>
